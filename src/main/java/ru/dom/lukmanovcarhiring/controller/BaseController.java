@@ -24,7 +24,7 @@ public class BaseController<P extends CommonParams> {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/hire", method = RequestMethod.POST)
+    @RequestMapping(value = "/hire"/*, method = RequestMethod.GET*/)
     public ModelAndView hire(P params) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("hire");

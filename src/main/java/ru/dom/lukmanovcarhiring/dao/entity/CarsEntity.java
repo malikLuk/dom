@@ -13,11 +13,22 @@ public class CarsEntity extends BaseEntity {
     @Column(name = "NAME")
     private String name;
 
+    @Column(name = "IN_USE")
+    private Boolean inUse;
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getInUse() {
+        return inUse;
+    }
+
+    public void setInUse(Boolean inUse) {
+        this.inUse = inUse;
     }
 }

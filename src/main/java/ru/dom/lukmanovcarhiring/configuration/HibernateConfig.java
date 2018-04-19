@@ -1,5 +1,6 @@
 package ru.dom.lukmanovcarhiring.configuration;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +14,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-public class HibernateConfiguration {
+public class HibernateConfig {
 
     @Value("${db.driver}")
     private String DRIVER;
@@ -33,12 +34,10 @@ public class HibernateConfiguration {
     @Value("${hibernate.show_sql}")
     private String SHOW_SQL;
 
-    /*@Value("${hibernate.hbm2ddl.auto}")
-    private String HBM2DDL_AUTO;*/
-
     @Value("${entitymanager.packagesToScan}")
     private String PACKAGES_TO_SCAN;
 
+//    @Qualifier("mainDataSource")
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -57,7 +56,6 @@ public class HibernateConfiguration {
         Properties hibernateProperties = new Properties();
         hibernateProperties.put("hibernate.dialect", DIALECT);
         hibernateProperties.put("hibernate.show_sql", SHOW_SQL);
-//        hibernateProperties.put("hibernate.hbm2ddl.auto", HBM2DDL_AUTO);
         sessionFactory.setHibernateProperties(hibernateProperties);
 
         return sessionFactory;
