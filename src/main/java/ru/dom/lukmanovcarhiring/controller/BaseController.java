@@ -5,10 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import ru.dom.lukmanovcarhiring.common.dao.CommonParams;
+import ru.dom.lukmanovcarhiring.dto.CarsDto;
 import ru.dom.lukmanovcarhiring.service.BaseService;
 
+import java.util.List;
+
 @RestController
-public class BaseController {
+public class BaseController<P extends CommonParams> {
 
     @Autowired
     private BaseService service;
@@ -21,10 +25,11 @@ public class BaseController {
     }
 
     @RequestMapping(value = "/hire", method = RequestMethod.POST)
-    public ModelAndView hire() {
+    public ModelAndView hire(P params) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("hire");
-        service.getAllCars();
+        List<CarsDto> cars = service.getAllCars(params);
+        modelAndView.addObject("cars", cars);
         return modelAndView;
     }
 

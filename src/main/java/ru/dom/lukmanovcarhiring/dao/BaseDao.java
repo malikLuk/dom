@@ -1,24 +1,22 @@
 package ru.dom.lukmanovcarhiring.dao;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.dom.lukmanovcarhiring.common.dao.BaseParams;
+import ru.dom.lukmanovcarhiring.common.dao.CommonParams;
 import ru.dom.lukmanovcarhiring.common.dao.CommonHibernateDAO;
-import ru.dom.lukmanovcarhiring.model.Cars;
-
-import java.util.List;
+import ru.dom.lukmanovcarhiring.dao.entity.CarsEntity;
+import ru.dom.lukmanovcarhiring.dto.CarsDto;
 
 @Repository
-public class BaseDao extends CommonHibernateDAO<BaseParams, Cars>{
+public class BaseDao extends CommonHibernateDAO<CommonParams, CarsEntity, CarsDto>{
 
     @Autowired
     private SessionFactory sessionFactory;
 
-    /*public List<Cars> getAllCars() {
+    /*public List<CarsEntity> getAllCars() {
         Session session = sessionFactory.getCurrentSession();
-        List<Cars> cars = session.createQuery("from Cars").list();
+        List<CarsEntity> cars = session.createQuery("from CarsEntity").list();
         return cars;
     }*/
 

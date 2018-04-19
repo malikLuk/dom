@@ -3,7 +3,7 @@ package ru.dom.lukmanovcarhiring.common.dao;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BaseParams {
+public class CommonParams {
 
     private Long id;
 
@@ -14,4 +14,5 @@ public class BaseParams {
     public void setId(Long id) {
         this.id = id;
     }
+
 }

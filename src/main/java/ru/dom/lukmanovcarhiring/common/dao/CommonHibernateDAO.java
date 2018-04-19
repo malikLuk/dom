@@ -2,42 +2,62 @@ package ru.dom.lukmanovcarhiring.common.dao;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.transaction.annotation.Transactional;
 import ru.dom.lukmanovcarhiring.common.dao.entity.BaseEntity;
+import ru.dom.lukmanovcarhiring.common.dto.CommonDto;
 
-import javax.persistence.Entity;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class CommonHibernateDAO<P extends BaseParams, E extends BaseEntity> {
+public class CommonHibernateDAO<P extends CommonParams, E extends BaseEntity, D extends CommonDto> {
 
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Autowired
+    private ModelMapper modelMapper;
+    
+    private Class<P> paramsClass;
+
     private Class<E> entityClass;
 
-    public Class<E> getTargetClass() {
+    private Class<D> dtoClass;
+
+    public Class<E> getEntityClass() {
         return entityClass;
     }
 
+    public Class<D> getDtoClass() { return dtoClass; }
+
+    public Class<P> getParamsClass() {
+        return paramsClass;
+    }
+
     protected Criteria getCriteria() {
-        return this.sessionFactory.getCurrentSession().createCriteria(this.getTargetClass());
+        return this.sessionFactory.getCurrentSession().createCriteria(this.getEntityClass());
     }
 
     public CommonHibernateDAO() {
         final Class<?>[] resolveTypeArguments = GenericTypeResolver.resolveTypeArguments(getClass(), CommonHibernateDAO.class);
+        this.paramsClass = (Class<P>) resolveTypeArguments[0];
         this.entityClass = (Class<E>) resolveTypeArguments[1];
+        this.dtoClass = (Class<D>) resolveTypeArguments[2];
     }
 
     @Transactional
-    public List<E> listAll() {
+    public List<D> listAll(P params) {
         Criteria criteria = this.getCriteria();
-        /*this.*/
-        return (List<E>) criteria.list();
+        addRestrictions(criteria, params);
+        List<D> dtoList = (List<D>) criteria.list()
+            .stream().map(entity -> modelMapper.map(entity, dtoClass))
+            .collect(Collectors.toList());
+        return dtoList;
     }
 
-    protected void addRestrictions(Criteria criteria, BaseParams params) {
+    protected void addRestrictions(Criteria criteria, CommonParams params) {
 
     }
 
