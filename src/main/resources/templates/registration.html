@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="base_template :: head"></head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+      <h1>Registration</h1>
+
+      <form th:action="@{/registration/register}" th:object="${user}" method="post">
+        <div class="form-group">
+          <button type="submit" class="btn btn-success">Register</button>
+          <span>Already registered? <a href="/" th:href="@{/login}">Login here</a></span>
+        </div>
+      </form>
+
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-package ru.dom.lukmanovcarhiring.dto;
+package ru.dom.lukmanovcarhiring.app.dto;
 
 import ru.dom.lukmanovcarhiring.common.dto.CommonDto;
 

@@ -1,12 +1,12 @@
-package ru.dom.lukmanovcarhiring.dao;
+package ru.dom.lukmanovcarhiring.app.dao;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.dom.lukmanovcarhiring.common.dao.CommonParams;
 import ru.dom.lukmanovcarhiring.common.dao.CommonHibernateDAO;
-import ru.dom.lukmanovcarhiring.dao.entity.CarsEntity;
-import ru.dom.lukmanovcarhiring.dto.CarsDto;
+import ru.dom.lukmanovcarhiring.app.dao.entity.CarsEntity;
+import ru.dom.lukmanovcarhiring.app.dto.CarsDto;
 
 @Repository
 public class BaseDao extends CommonHibernateDAO<CommonParams, CarsEntity, CarsDto>{

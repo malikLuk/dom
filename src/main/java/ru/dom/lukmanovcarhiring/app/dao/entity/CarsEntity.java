@@ -1,4 +1,4 @@
-package ru.dom.lukmanovcarhiring.dao.entity;
+package ru.dom.lukmanovcarhiring.app.dao.entity;
 
 import ru.dom.lukmanovcarhiring.common.dao.entity.BaseEntity;
 

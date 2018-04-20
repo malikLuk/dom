@@ -1,4 +1,4 @@
-package ru.dom.lukmanovcarhiring.controller;
+package ru.dom.lukmanovcarhiring.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import ru.dom.lukmanovcarhiring.common.dao.CommonParams;
-import ru.dom.lukmanovcarhiring.dto.CarsDto;
-import ru.dom.lukmanovcarhiring.service.BaseService;
+import ru.dom.lukmanovcarhiring.app.dto.CarsDto;
+import ru.dom.lukmanovcarhiring.app.service.BaseService;
 
 import java.util.List;
 
