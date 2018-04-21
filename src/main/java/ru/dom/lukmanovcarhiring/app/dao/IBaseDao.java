@@ -1,11 +1,11 @@
 package ru.dom.lukmanovcarhiring.app.dao;
 
-import ru.dom.lukmanovcarhiring.app.dao.entity.CarsEntity;
+import ru.dom.lukmanovcarhiring.app.dao.entity.CarEntity;
 
 import java.util.List;
 
 public interface IBaseDao {
 
-    public List<CarsEntity> getAllCars();
+    public List<CarEntity> getAllCars();
 
 }

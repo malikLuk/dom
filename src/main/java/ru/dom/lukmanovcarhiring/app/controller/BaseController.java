@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import ru.dom.lukmanovcarhiring.common.dao.CommonParams;
-import ru.dom.lukmanovcarhiring.app.dto.CarsDto;
+import ru.dom.lukmanovcarhiring.app.dto.CarDto;
 import ru.dom.lukmanovcarhiring.app.service.BaseService;
 
 import java.util.List;
@@ -28,8 +28,8 @@ public class BaseController<P extends CommonParams> {
     public ModelAndView hire(P params) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("hire");
-        List<CarsDto> cars = service.getAllCars(params);
-        modelAndView.addObject("cars", cars);
+        List<CarDto> carList = service.getAllCars(params);
+        modelAndView.addObject("carList", carList);
         return modelAndView;
     }
 

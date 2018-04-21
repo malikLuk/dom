@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.dom.lukmanovcarhiring.common.dao.CommonParams;
 import ru.dom.lukmanovcarhiring.app.dao.BaseDao;
-import ru.dom.lukmanovcarhiring.app.dto.CarsDto;
+import ru.dom.lukmanovcarhiring.app.dto.CarDto;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class BaseService<P extends CommonParams> {
     private BaseDao baseDao;
 
     @Transactional
-    public List<CarsDto> getAllCars(P params) {
+    public List<CarDto> getAllCars(P params) {
         return baseDao.listAll(params);
     }
 

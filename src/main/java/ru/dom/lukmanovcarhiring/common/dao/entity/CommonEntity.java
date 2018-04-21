@@ -5,10 +5,10 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class BaseEntity {
+public class CommonEntity {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "I_ID")
     private Long id;
 
     public Long getId() {

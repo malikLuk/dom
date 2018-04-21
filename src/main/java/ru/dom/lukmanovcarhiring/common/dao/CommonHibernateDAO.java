@@ -6,13 +6,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.transaction.annotation.Transactional;
-import ru.dom.lukmanovcarhiring.common.dao.entity.BaseEntity;
+import ru.dom.lukmanovcarhiring.common.dao.entity.CommonEntity;
 import ru.dom.lukmanovcarhiring.common.dto.CommonDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CommonHibernateDAO<P extends CommonParams, E extends BaseEntity, D extends CommonDto> {
+public class CommonHibernateDAO<P extends CommonParams, E extends CommonEntity, D extends CommonDto> {
 
     @Autowired
     private SessionFactory sessionFactory;

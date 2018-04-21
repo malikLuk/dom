@@ -54,3 +54,11 @@ ul li {
   position: relative;
   top: 1px;
 }
+
+.error-message {
+  color: #a94442;
+}
+
+.error-message:first-letter {
+  text-transform: capitalize;
+}
