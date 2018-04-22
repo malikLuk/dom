@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.GenericTypeResolver;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.transaction.annotation.Transactional;
 import ru.dom.lukmanovcarhiring.common.dao.entity.CommonEntity;
 import ru.dom.lukmanovcarhiring.common.dto.CommonDto;
@@ -58,6 +59,10 @@ public class CommonHibernateDAO<P extends CommonParams, E extends CommonEntity, 
     }
 
     protected void addRestrictions(Criteria criteria, CommonParams params) {
+
+    }
+
+    public void create(P params) {
 
     }
 
