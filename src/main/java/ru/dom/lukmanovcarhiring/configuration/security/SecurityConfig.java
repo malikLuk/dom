@@ -35,33 +35,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http
-            .authorizeRequests()
-            .antMatchers(
-                "/registration",
-                "/js/**",
-                "/css/**",
-                "/img/**",
-                "/webjars/**").permitAll().antMatchers("/hire")./*access("hasRole('USER')")*/permitAll()
-            .anyRequest().authenticated()
-            .and()
-            .formLogin()
-            .loginPage("/login")
-            .permitAll();
-        /*http.authorizeRequests().antMatchers("/", "/list")
-            .access("hasRole('USER') or hasRole('ADMIN') or hasRole('DBA')")
-            .antMatchers("/newuser/**", "/delete-user-*").access("hasRole('ADMIN')").antMatchers("/edit-user-*")
-            .access("hasRole('ADMIN') or hasRole('DBA')").and().formLogin().loginPage("/login")
-            .loginProcessingUrl("/login").usernameParameter("ssoId").passwordParameter("password").and()
-            .rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository)
-            .tokenValiditySeconds(86400).and().csrf().and().exceptionHandling().accessDeniedPage("/Access_Denied");*/
+        http.authorizeRequests().antMatchers(
+            "/registration",
+            "/js/**",
+            "/css/**",
+            "/img/**",
+            "/webjars/**").permitAll().and().formLogin().loginPage("/login").permitAll()
+            .and().authorizeRequests().antMatchers("/", "/hire").hasAuthority("USER")
+            .anyRequest().authenticated();
+
     }
 
 }
