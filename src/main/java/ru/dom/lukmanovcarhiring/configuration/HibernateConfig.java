@@ -56,6 +56,7 @@ public class HibernateConfig {
         Properties hibernateProperties = new Properties();
         hibernateProperties.put("hibernate.dialect", DIALECT);
         hibernateProperties.put("hibernate.show_sql", SHOW_SQL);
+        hibernateProperties.put("hibernate.id.new_generator_mappings", false);
         sessionFactory.setHibernateProperties(hibernateProperties);
 
         return sessionFactory;

@@ -1,13 +1,12 @@
 package ru.dom.lukmanovcarhiring.common.dao.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 @MappedSuperclass
 public class CommonEntity {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "I_ID")
     private Long id;
 

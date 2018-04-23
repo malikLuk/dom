@@ -32,10 +32,10 @@
             <version>1.9.3</version>
         </dependency>
 
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>-->
+        </dependency>
 
         <!-- optional, it brings userful tags to display spring security stuff -->
         <!--<dependency>

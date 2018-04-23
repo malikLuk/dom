@@ -21,6 +21,9 @@ public class UserDto extends CommonDto {
   @NotEmpty
   private String confirmPassword;
 
+//  @NotEmpty
+  private String role;
+
   public String getFirstName() {
     return firstName;
   }
@@ -51,5 +54,13 @@ public class UserDto extends CommonDto {
 
   public void setConfirmPassword(String confirmPassword) {
     this.confirmPassword = confirmPassword;
+  }
+
+  public String getRole() {
+    return role;
+  }
+
+  public void setRole(String role) {
+    this.role = role;
   }
 }
