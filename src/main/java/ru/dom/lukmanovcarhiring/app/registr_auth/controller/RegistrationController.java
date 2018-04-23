@@ -36,18 +36,10 @@ public class RegistrationController {
             modelAndView.setViewName("registration");
             return modelAndView;
         }
-        System.out.println(userDto);
         userService.saveUser(userDto);
-        ModelAndView modelAndView1 = new ModelAndView();
         modelAndView.setViewName("login");
         return modelAndView;
 
     }
-
-    /*@PostMapping(value = "/register")
-    public void register() {
-        System.out.println(0);
-    }*/
-
 
 }

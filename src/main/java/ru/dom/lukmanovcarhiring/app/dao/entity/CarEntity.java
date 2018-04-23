@@ -15,6 +15,17 @@ public class CarEntity extends CommonEntity {
     @Enumerated(EnumType.ORDINAL)
     private CarHiringStatus status;
 
+    @Column(name = "I_ID_RENTER")
+    private Long idRenter;
+
+    public Long getIdRenter() {
+        return idRenter;
+    }
+
+    public void setIdRenter(Long idRenter) {
+        this.idRenter = idRenter;
+    }
+
     public String getName() {
         return name;
     }
