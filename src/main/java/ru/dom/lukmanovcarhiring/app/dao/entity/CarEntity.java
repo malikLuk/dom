@@ -15,16 +15,8 @@ public class CarEntity extends CommonEntity {
     @Enumerated(EnumType.ORDINAL)
     private CarHiringStatus status;
 
-    @Column(name = "I_ID_RENTER")
-    private Long idRenter;
-
-    public Long getIdRenter() {
-        return idRenter;
-    }
-
-    public void setIdRenter(Long idRenter) {
-        this.idRenter = idRenter;
-    }
+    @Column(name = "I_CURRENT_LOCATION_ID")
+    private Long currentLocationid;
 
     public String getName() {
         return name;
@@ -40,5 +32,13 @@ public class CarEntity extends CommonEntity {
 
     public void setStatus(CarHiringStatus status) {
         this.status = status;
+    }
+
+    public Long getCurrentLocationid() {
+        return currentLocationid;
+    }
+
+    public void setCurrentLocationid(Long currentLocationid) {
+        this.currentLocationid = currentLocationid;
     }
 }

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ru.dom.lukmanovcarhiring.common.dao.CommonParams;
+import ru.dom.lukmanovcarhiring.common.params.CommonParams;
 import ru.dom.lukmanovcarhiring.app.dto.CarDto;
 import ru.dom.lukmanovcarhiring.app.service.BaseService;
 
@@ -30,13 +30,13 @@ public class BaseController<P extends CommonParams> {
 
     }
 
-    @RequestMapping(value = "/hire")
+    /*@RequestMapping(value = "/hire")
     public ModelAndView hire(P params) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("hire");
-        List<CarDto> carList = service.getAllCars(params);
+        List<CarDto> carList = service.filter(params);
         modelAndView.addObject("carList", carList);
         return modelAndView;
-    }
+    }*/
 
 }

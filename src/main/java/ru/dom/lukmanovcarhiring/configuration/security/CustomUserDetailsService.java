@@ -3,6 +3,7 @@ package ru.dom.lukmanovcarhiring.configuration.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         if(userEntity==null){
             throw new UsernameNotFoundException("Username not found");
         }
-        return new org.springframework.security.core.userdetails.User(userEntity.getFirstName(), userEntity.getPassword(),
+        return new User(userEntity.getFirstName(), userEntity.getPassword(),
             true, true, true, true, this.getAuthorities(userEntity));
     }
 

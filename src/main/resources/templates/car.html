@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="base_template :: head"></head>
+</head>
+<body>
+<h1>WWWWWWWWW</h1>
+
+<!--<option th:each="cars:${cars}" th:value="${cars.id}" th:text="${cars.name}"></option>-->
+
+<div class="row text-center">
+  <div class="col-md-3 col-sm-6 hero-feature" th:each="car:${carList}">
+    <div class="thumbnail">
+      <img th:src="@{'/img/'+${car.name}+'.jpg'}" />
+      <div class="caption">
+        <h3 th:text="${car.name}"></h3>
+        <p th:text="${car.status}"></p>
+        <!--<p th:text="${p.carPrice}+ ' EUR / day'"></p>-->
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

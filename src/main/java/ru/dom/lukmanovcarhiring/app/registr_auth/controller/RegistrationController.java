@@ -29,7 +29,7 @@ public class RegistrationController {
         return modelAndView;
     }
 
-    @PostMapping(/*value = "/register"*/)
+    @PostMapping()
     public ModelAndView registerAccount(@ModelAttribute("userEntity") @Valid UserDto userDto, BindingResult result) {
         ModelAndView modelAndView = new ModelAndView();
         if (result.hasErrors()){

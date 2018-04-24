@@ -5,15 +5,15 @@ import org.hibernate.SessionFactory;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.GenericTypeResolver;
-import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.transaction.annotation.Transactional;
 import ru.dom.lukmanovcarhiring.common.dao.entity.CommonEntity;
 import ru.dom.lukmanovcarhiring.common.dto.CommonDto;
+import ru.dom.lukmanovcarhiring.common.params.CommonParams;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CommonHibernateDAO<P extends CommonParams, E extends CommonEntity, D extends CommonDto> {
+public abstract class CommonHibernateDAO<P extends CommonParams, E extends CommonEntity, D extends CommonDto> {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -58,7 +58,17 @@ public class CommonHibernateDAO<P extends CommonParams, E extends CommonEntity, 
         return dtoList;
     }
 
-    protected void addRestrictions(Criteria criteria, CommonParams params) {
+    @Transactional
+    public List<D> filter(P params) {
+        Criteria criteria = this.getCriteria();
+        addRestrictions(criteria, params);
+        List<D> dtoList = (List<D>) criteria.list()
+            .stream().map(entity -> modelMapper.map(entity, dtoClass))
+            .collect(Collectors.toList());
+        return dtoList;
+    }
+
+    protected void addRestrictions(Criteria criteria, P params) {
 
     }
 

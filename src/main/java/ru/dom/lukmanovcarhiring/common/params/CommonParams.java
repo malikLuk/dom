@@ -1,4 +1,4 @@
-package ru.dom.lukmanovcarhiring.common.dao;
+package ru.dom.lukmanovcarhiring.common.params;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

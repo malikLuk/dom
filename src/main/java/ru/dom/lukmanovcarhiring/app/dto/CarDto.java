@@ -9,16 +9,15 @@ public class CarDto extends CommonDto {
 
     private CarHiringStatus status;
 
-    private Long idRenter;
+    private Long currentLocationid;
 
-    public Long getIdRenter() {
-        return idRenter;
+    public Long getCurrentLocationid() {
+        return currentLocationid;
     }
 
-    public void setIdRenter(Long idRenter) {
-        this.idRenter = idRenter;
+    public void setCurrentLocationid(Long currentLocationid) {
+        this.currentLocationid = currentLocationid;
     }
-
 
     public String getName() {
         return name;
