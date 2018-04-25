@@ -2,22 +2,24 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="base_template :: head"></head>
 <body>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
 
-<div class="container">
-  <ul>
-    <li>
-      <form th:action="@{/car_hiring/location}" method="post">
-        <button class="myButton">Hire</button>
-      </form>
-    </li>
-    <li>
-      <form th:action="@{/take}" method="post">
-        <button class="myButton">Take</button>
-      </form>
-    </li>
-  </ul>
+<div id="base_container">
+  <div class="container">
+    <ul>
+      <li>
+        <form th:action="@{/car_hiring/location}" method="post">
+          <button class="myButton">Hire</button>
+        </form>
+      </li>
+      <li>
+        <form th:action="@{/take}" method="post">
+          <button class="myButton">Take</button>
+        </form>
+      </li>
+    </ul>
+  </div>
 </div>
-
 
 </body>
 </html>

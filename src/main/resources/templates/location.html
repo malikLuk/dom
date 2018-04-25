@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="base_template :: head"></head>
-</head>
 <body>
+<script type="text/javascript" th:src="@{/js/location.js}"></script>
 <h1>QQQQQQ</h1>
 
 <div class="row text-center">
@@ -10,15 +10,16 @@
     <div class="thumbnail">
       <div class="caption">
         <h3 th:text="${location.address}"></h3>
-        <form th:action="@{/car_hiring/car}" method="post">
-          <button class="myButton">Hire</button>
+        <h4 th:text="${location.id}"></h4>
+        <form action="#" th:action="@{/car_hiring/car}" th:object="${location}" method="post">
+          <button class="myButton" th:value="${location}">Hire</button>
         </form>
-        <!--<p th:text="${car.status}"></p>-->
-        <!--<p th:text="${p.carPrice}+ ' EUR / day'"></p>-->
-
       </div>
     </div>
   </div>
+</div>
+<div id="car_list">
+
 </div>
 
 </body>
