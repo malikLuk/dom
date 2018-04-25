@@ -1,10 +1,11 @@
 $( document ).ready(function () {
     console.warn(1);
+    debugger;
 
     $.ajax({
         type: "POST",
         url: "http://localhost:8888/car_hiring/car",
-        data: {id: 1},
+        data: JSON.stringify({id: 1}),
         headers: {
             "content-type": "application/json",
             "token": "secret_token",
