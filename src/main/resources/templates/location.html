@@ -3,8 +3,6 @@
 <head th:replace="base_template :: head"></head>
 <body>
 <script type="text/javascript" th:src="@{/js/location.js}"></script>
-<h1>QQQQQQ</h1>
-
 <div class="row text-center">
   <div class="col-md-3 col-sm-6 hero-feature" th:each="location:${locationList}">
     <div class="thumbnail">
@@ -12,16 +10,21 @@
         <h3 th:text="${location.address}"></h3>
         <h4 th:text="${location.id}"></h4>
         <!--<form action="#" th:action="@{/car_hiring/car}" th:object="${location}" method="post">-->
-        <form th:id="'test_id_' + ${location.id}">
+        <form th:id="'get_car_list_' + ${location.id}">
           <button class="myButton" th:value="${location}">Hire</button>
         </form>
       </div>
     </div>
   </div>
 </div>
+<div></div>
 <div id="car_list">
 
 </div>
+<div id="kek">
+
+</div>
+
 
 </body>
 </html>

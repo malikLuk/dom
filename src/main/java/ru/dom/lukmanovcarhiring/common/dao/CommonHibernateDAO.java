@@ -78,8 +78,8 @@ public abstract class CommonHibernateDAO<P extends CommonParams, E extends Commo
         try {
             for (PropertyDescriptor descriptor : Introspector.getBeanInfo(params.getClass()).getPropertyDescriptors()) {
                 System.out.println(descriptor.getReadMethod());
-                if (descriptor.getReadMethod().invoke(params) != null) {
-                    criteria.add(Restrictions.eq("", descriptor.getReadMethod().invoke(params)));
+                if (descriptor.getReadMethod().invoke(params) != null && !"class".equals(descriptor.getName())) {
+                    criteria.add(Restrictions.eq(descriptor.getName(), descriptor.getReadMethod().invoke(params)));
                 }
             }
         } catch (Exception e) {
