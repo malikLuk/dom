@@ -29,27 +29,26 @@ function go(event, currentId) {
         success: function (data) {
             var carList = $("#car_list");
             carList.empty();
-
             $('<div class="row text-center">')
                 .append('<div class="col-md-3 col-sm-6 hero-feature" id="car_place">')
                 .appendTo(carList);
+
             var carPlace = $('#car_place');
-            data.forEach(function (value) {
-                $('<div class="thumbnail">').append('<img src="/img/' + value.name +'.jpg" />').appendTo(carPlace);
+            data.forEach(function (value, index) {
+
+                $('<div class="thumbnail" id="car_thumbnail_' + index + '">').append('<img src="/img/' + value.name +'.jpg" />').appendTo(carPlace);
+
+                var carThumbnail = $('#car_thumbnail_' + index);
+                carThumbnail.append('<div class="caption" id="car_caption_' + index + '">');
+
+                var carCaption = $('#car_caption_' + index);
+                carCaption.append('<h3>qqqqqq</h3>').append('<p>qwwwwwwwwwww</p>')
+
             });
 
-        /*<div class="thumbnail">
-                <img th:src="@{'/img/'+${car.name}+'.jpg'}" />
-                <div class="caption">
-                <h3 th:text="${car.name}"></h3>
-                <p th:text="${car.status}"></p>
-                <form th:action="@{/car_hiring/car}" method="post">
-                <button class="myButton">Hire</button>
-                </form>
-                <!--<p th:text="${p.carPrice}+ ' EUR / day'"></p>-->
 
-                </div>
-                </div>*/
+
+
 
         },
         error: function () {
