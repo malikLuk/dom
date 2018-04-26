@@ -16,7 +16,7 @@ public class CarEntity extends CommonEntity {
     private CarHiringStatus status;
 
     @Column(name = "I_CURRENT_LOCATION_ID")
-    private Long currentLocationid;
+    private Long currentLocationId;
 
     public String getName() {
         return name;
@@ -34,11 +34,11 @@ public class CarEntity extends CommonEntity {
         this.status = status;
     }
 
-    public Long getCurrentLocationid() {
-        return currentLocationid;
+    public Long getCurrentLocationId() {
+        return currentLocationId;
     }
 
-    public void setCurrentLocationid(Long currentLocationid) {
-        this.currentLocationid = currentLocationid;
+    public void setCurrentLocationId(Long currentLocationId) {
+        this.currentLocationId = currentLocationId;
     }
 }

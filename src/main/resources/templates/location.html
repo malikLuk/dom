@@ -11,7 +11,8 @@
       <div class="caption">
         <h3 th:text="${location.address}"></h3>
         <h4 th:text="${location.id}"></h4>
-        <form action="#" th:action="@{/car_hiring/car}" th:object="${location}" method="post">
+        <!--<form action="#" th:action="@{/car_hiring/car}" th:object="${location}" method="post">-->
+        <form th:id="'test_id_' + ${location.id}">
           <button class="myButton" th:value="${location}">Hire</button>
         </form>
       </div>

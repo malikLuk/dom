@@ -6,6 +6,16 @@ create table user(i_id int not null auto_increment,
                   s_role varchar(255),
                   primary key(i_id));
 
+create table location(i_id int not null auto_increment,
+                      s_address varchar(255),
+                      primary key(i_id));
+
+create table car(i_id int not null auto_increment,
+                 i_current_location_id int not null,
+                 s_name varchar(255),
+                 i_status int default 0,
+                 primary key(i_id),
+                 foreign key (i_current_location_id) references location(i_id));
 
 create table reservation(i_id int not null auto_increment,
                          d_pickup_date date,
@@ -20,19 +30,14 @@ create table reservation(i_id int not null auto_increment,
                          foreign key(i_pickup_location_id) references location(i_id),
                          foreign key(i_return_location_id) references location(i_id));
 
-
-create table car(i_id int not null auto_increment,
-                 i_current_location_id int not null,
-                 s_name varchar(255),
-                 i_status int default 0,
-                 primary key(i_id),
-                 foreign key (i_current_location_id) references location(i_id));
-
-create table location(i_id int not null auto_increment,
-                      s_address varchar(255),
-                      primary key(i_id));
-
 -------------------------------------------- inserts --------------------------------------------
+
+insert into location(s_address) values
+                       ('balatovo'),
+                       ('kompross'),
+                       ('zakamsk');
+
+
 insert into car(i_current_location_id, s_name, i_status) values
                 (1, 'audi', 0),
                 (2, 'bike', 0),
@@ -40,12 +45,6 @@ insert into car(i_current_location_id, s_name, i_status) values
                 (1, 'onefour', 0),
                 (2, 'tank', 0),
                 (3, 'tsoi', 0);
-
-insert into location(s_address) values
-                       ('balatovo'),
-                       ('kompross'),
-                       ('zakamsk');
-
 
 /*
 create table role(i_id int not null auto_increment,

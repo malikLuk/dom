@@ -2,6 +2,7 @@ package ru.dom.lukmanovcarhiring.common.dao;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.GenericTypeResolver;
@@ -10,6 +11,11 @@ import ru.dom.lukmanovcarhiring.common.dao.entity.CommonEntity;
 import ru.dom.lukmanovcarhiring.common.dto.CommonDto;
 import ru.dom.lukmanovcarhiring.common.params.CommonParams;
 
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -69,7 +75,16 @@ public abstract class CommonHibernateDAO<P extends CommonParams, E extends Commo
     }
 
     protected void addRestrictions(Criteria criteria, P params) {
-
+        try {
+            for (PropertyDescriptor descriptor : Introspector.getBeanInfo(params.getClass()).getPropertyDescriptors()) {
+                System.out.println(descriptor.getReadMethod());
+                if (descriptor.getReadMethod().invoke(params) != null) {
+                    criteria.add(Restrictions.eq("", descriptor.getReadMethod().invoke(params)));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void create(P params) {

@@ -64,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasAuthority("USER")
             .anyRequest().authenticated()
                 .and()
-            .csrf().disable();
+            /*.csrf().disable()*/;
 
     }
 

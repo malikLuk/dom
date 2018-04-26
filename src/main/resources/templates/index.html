@@ -9,7 +9,7 @@
     <ul>
       <li>
         <form th:action="@{/car_hiring/location}" method="post">
-          <button class="myButton">Hire</button>
+          <button class="myButton" th:value="${_csrf.token}">Hire</button>
         </form>
       </li>
       <li>
