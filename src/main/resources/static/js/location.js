@@ -43,8 +43,8 @@ function go(event, currentId) {
 
             });
 
-            wildcardEvent("my_btn_id_", "click", function () {
-                return hire()
+            $("[id^=my_btn_id_]").on('click', function (event) {
+                hire();
             });
 
         },
@@ -55,11 +55,11 @@ function go(event, currentId) {
 }
 
 function hire() {
-
+    alert(1488);
 }
 
 function wildcardEvent(idTemplate, eventType, func) {
     $("[id^=" + idTemplate + "]").on(eventType, function (event) {
-        func();
+        func(event);
     });
 }
