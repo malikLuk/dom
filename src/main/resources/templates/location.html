@@ -3,6 +3,11 @@
 <head th:replace="base_template :: head"></head>
 <body>
 <script type="text/javascript" th:src="@{/js/location.js}"></script>
+<div>
+  <form id="show_my_cars">
+    <button class="myButton" th:value="${location}">Hire</button>
+  </form>
+</div>
 <div class="row text-center">
   <div class="col-md-3 col-sm-6 hero-feature" th:each="location:${locationList}">
     <div class="thumbnail">

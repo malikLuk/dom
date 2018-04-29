@@ -1,6 +1,6 @@
 -------------------------------------------- creates --------------------------------------------
 create table user(i_id int not null auto_increment,
-                  s_first_name varchar(255),
+                  s_first_name varchar(255) unique,
                   s_last_name varchar(255),
                   s_password varchar(255),
                   s_role varchar(255),

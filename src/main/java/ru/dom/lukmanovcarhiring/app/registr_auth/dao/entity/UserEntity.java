@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Table(name = "USER")
 public class UserEntity extends CommonEntity {
 
-  @Column(name = "S_FIRST_NAME")
+  @Column(name = "S_FIRST_NAME", unique=true)
   private String firstName;
 
   @Column(name = "S_LAST_NAME")

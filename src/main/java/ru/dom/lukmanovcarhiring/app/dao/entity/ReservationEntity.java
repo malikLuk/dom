@@ -2,11 +2,11 @@ package ru.dom.lukmanovcarhiring.app.dao.entity;
 
 import ru.dom.lukmanovcarhiring.common.dao.entity.CommonEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import java.sql.Date;
+import javax.persistence.*;
+import java.util.Date;
 
+@Entity
+@Table(name = "RESERVATION")
 public class ReservationEntity extends CommonEntity {
 
     @Column(name = "D_PICKUP_DATE")

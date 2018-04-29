@@ -2,7 +2,7 @@ package ru.dom.lukmanovcarhiring.app.dto;
 
 import ru.dom.lukmanovcarhiring.common.dto.CommonDto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class ReservationDto extends CommonDto {
 

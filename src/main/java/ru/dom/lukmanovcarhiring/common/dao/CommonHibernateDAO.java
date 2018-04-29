@@ -47,6 +47,10 @@ public abstract class CommonHibernateDAO<P extends CommonParams, E extends Commo
         return this.sessionFactory.getCurrentSession().createCriteria(this.getEntityClass());
     }
 
+    protected SessionFactory getSessionFactory() {
+        return this.sessionFactory;
+    }
+
     public CommonHibernateDAO() {
         final Class<?>[] resolveTypeArguments = GenericTypeResolver.resolveTypeArguments(getClass(), CommonHibernateDAO.class);
         this.paramsClass = (Class<P>) resolveTypeArguments[0];
@@ -73,6 +77,9 @@ public abstract class CommonHibernateDAO<P extends CommonParams, E extends Commo
             .collect(Collectors.toList());
         return dtoList;
     }
+
+    @Transactional
+    public void reserve() {}
 
     protected void addRestrictions(Criteria criteria, P params) {
         try {

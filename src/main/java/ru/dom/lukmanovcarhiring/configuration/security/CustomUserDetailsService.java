@@ -3,13 +3,11 @@ package ru.dom.lukmanovcarhiring.configuration.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.dom.lukmanovcarhiring.app.dto.UserDto;
 import ru.dom.lukmanovcarhiring.app.registr_auth.dao.entity.UserEntity;
 
 import java.util.Arrays;
@@ -28,8 +26,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         if(userEntity==null){
             throw new UsernameNotFoundException("Username not found");
         }
-        return new User(userEntity.getFirstName(), userEntity.getPassword(),
-            true, true, true, true, this.getAuthorities(userEntity));
+        return new CustomUser(userEntity.getFirstName(), userEntity.getPassword(),
+            true, true, true, true, this.getAuthorities(userEntity), userEntity.getId());
     }
 
     private List<GrantedAuthority> getAuthorities(UserEntity userEntity) {
