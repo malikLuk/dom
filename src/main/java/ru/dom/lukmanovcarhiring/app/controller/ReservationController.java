@@ -41,10 +41,4 @@ public class ReservationController extends CommonController<ReservationParams, R
     return new ResponseEntity<List<ReservationDto>>(list, HttpStatus.OK);
   }
 
-  /*@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<List<CarDto>> hire(Map<String, Object> model, @RequestBody CarParams params) {
-    List<CarDto> list =  this.filter(model, params);
-    return new ResponseEntity<List<CarDto>>(list, HttpStatus.OK);
-  }*/
-
 }

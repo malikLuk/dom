@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ru.dom.lukmanovcarhiring.common.dao.entity.CommonEntity;
@@ -33,6 +34,10 @@ public abstract class CommonController<P extends CommonParams, E extends CommonE
 //    @RequestMapping(value = "/filter", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<D> filter(Map<String, Object> model, P params) {
         return this.getService().filter(params);
+    }
+
+    public D updateStatus(Long id) {
+        return this.getService().updateStatus(id);
     }
 
 }

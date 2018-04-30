@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.dom.lukmanovcarhiring.app.dao.entity.CarEntity;
 import ru.dom.lukmanovcarhiring.app.dto.CarDto;
 import ru.dom.lukmanovcarhiring.app.params.CarParams;
+import ru.dom.lukmanovcarhiring.app.params.ReservationParams;
 import ru.dom.lukmanovcarhiring.app.service.CarService;
 import ru.dom.lukmanovcarhiring.app.service.ReservationService;
 import ru.dom.lukmanovcarhiring.common.controller.CommonController;
@@ -21,32 +22,33 @@ import java.util.Map;
 public class CarController extends CommonController<CarParams, CarEntity, CarDto> {
 
     @Autowired
-    private final CarService service;
+    private final CarService carService;
 
     @Autowired
     private final ReservationService reservationService;
 
     @Autowired
     public CarController(CarService service, ReservationService reservationService) {
-        this.service = service;
+        this.carService = service;
         this.reservationService = reservationService;
     }
 
     @Override
     public CommonService<CarParams, CarEntity, CarDto> getService() {
-        return service;
+        return carService;
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CarDto>> hire(Map<String, Object> model, @RequestBody CarParams params) {
+    public ResponseEntity<List<CarDto>> getCars(Map<String, Object> model, @RequestBody CarParams params) {
         List<CarDto> list =  this.filter(model, params);
         return new ResponseEntity<List<CarDto>>(list, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/reserve", method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void reserve() {
-        reservationService.reserve();
+    public ResponseEntity<CarDto> reserve(Map<String, Object> model, @RequestBody ReservationParams params) {
+        reservationService.reserve(params);
+        return new ResponseEntity<CarDto>(this.updateStatus(params.getCarId()), HttpStatus.OK);
     }
 
 }

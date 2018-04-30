@@ -24,4 +24,5 @@ public class CarService extends CommonService<CarParams, CarEntity, CarDto> {
     public CommonHibernateDAO<CarParams, CarEntity, CarDto> getDao() {
         return dao;
     }
+
 }

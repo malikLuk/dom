@@ -3,9 +3,15 @@
 <head th:replace="base_template :: head"></head>
 <body>
 <script type="text/javascript" th:src="@{/js/location.js}"></script>
+<h1 id="current_location"></h1>
 <div>
   <form id="show_my_cars">
-    <button class="myButton" th:value="${location}">Hire</button>
+    <button class="myButton" >my cars</button>
+  </form>
+</div>
+<div>
+  <form th:action="@{/index}" method="get">
+    <button class="myButton" >back</button>
   </form>
 </div>
 <div class="row text-center">
@@ -14,9 +20,8 @@
       <div class="caption">
         <h3 th:text="${location.address}"></h3>
         <h4 th:text="${location.id}"></h4>
-        <!--<form action="#" th:action="@{/car_hiring/car}" th:object="${location}" method="post">-->
         <form th:id="'get_car_list_' + ${location.id}">
-          <button class="myButton" th:value="${location}">Hire</button>
+          <button class="myButton" th:value="${location}">Choose hood</button>
         </form>
       </div>
     </div>

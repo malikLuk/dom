@@ -1,8 +1,8 @@
 $(document).ready(function () {
 
   $("[id^=get_car_list_]").on('click', function (event) {
-    var currentId = event.currentTarget.id.replace('get_car_list_', '');  //вырезаем из подстроки нр get_car_list_1 get_car_list_ и
-    go(event, currentId);                                                 // оставляем только номер
+    var currentId = replaceId(event, 'get_car_list_', '');
+    getCarList(event, currentId);
   });
 
   $("#show_my_cars").on("click", function (event) {
@@ -21,16 +21,44 @@ function showMyCars(event) {
     headers: headers,
     success: function (data) {
       console.warn(data);
+      var carList = $("#car_list");
+      carList.empty();
+      $('<div class="row text-center">')
+          .append('<div class="col-md-3 col-sm-6 hero-feature" id="car_place">')
+          .appendTo(carList);
+
+      var carPlace = $('#car_place');
+      data.forEach(function (value) {
+
+        $('<div class="thumbnail" id="car_thumbnail_' + value.id + '">').append('<img src="/img/' + value.name + '.jpg" />').appendTo(carPlace);
+
+        var carThumbnail = $('#car_thumbnail_' + value.id);
+        carThumbnail.append('<div class="caption" id="car_caption_' + value.id + '">');
+
+        var carCaption = $('#car_caption_' + value.id);
+        carCaption.append('<h3>' + value.name + '</h3>').append('<p>' + value.status + '</p>');
+
+        $('<button class="myButton" id="my_btn_id_' + value.id + '">hire car</button>').appendTo(carCaption);
+        $('#my_btn_id_' + value.id).prop('disabled', value.status != 'IS_AVAILABLE')
+
+      });
+
+      $("[id^=my_btn_id_]").on('click', function (event) {
+        giveBack(event);
+      });
     },
     error: function () {
       debugger;
     }
   });
-  // alert(1);
 }
 
-function go(event, currentId) {
-  event.preventDefault();
+function getCarList(event, currentId) {
+  var me = this;
+  me.currentLocationId = currentId;
+  // ищем имя текущего адреса по странице, чтобы не лезть в базу
+  $('#current_location').text($('#get_car_list_'+currentId).parent().find('h3').text());
+  event ? event.preventDefault() : null;
   var headers = getHeaders();
   $.ajax({
     type: "POST",
@@ -45,22 +73,24 @@ function go(event, currentId) {
           .appendTo(carList);
 
       var carPlace = $('#car_place');
-      data.forEach(function (value, index) {
+      data.forEach(function (value) {
+        debugger;
 
-        $('<div class="thumbnail" id="car_thumbnail_' + index + '">').append('<img src="/img/' + value.name + '.jpg" />').appendTo(carPlace);
+        $('<div class="thumbnail" id="car_thumbnail_' + value.id + '">').append('<img src="/img/' + value.name + '.jpg" />').appendTo(carPlace);
 
-        var carThumbnail = $('#car_thumbnail_' + index);
-        carThumbnail.append('<div class="caption" id="car_caption_' + index + '">');
+        var carThumbnail = $('#car_thumbnail_' + value.id);
+        carThumbnail.append('<div class="caption" id="car_caption_' + value.id + '">');
 
-        var carCaption = $('#car_caption_' + index);
-        carCaption.append('<h3>' + value.name + '</h3>').append('<p>' + value.status + '</p>')
+        var carCaption = $('#car_caption_' + value.id);
+        carCaption.append('<h3>' + value.name + '</h3>').append('<p>' + value.status + '</p>');
 
-        $('<button class="myButton" id="my_btn_id_' + index + '">hire</button>').appendTo(carCaption);
+        $('<button class="myButton" id="my_btn_id_' + value.id + '">hire car</button>').appendTo(carCaption);
+        $('#my_btn_id_' + value.id).prop('disabled', value.status != 'IS_AVAILABLE')
 
       });
 
       $("[id^=my_btn_id_]").on('click', function (event) {
-        hire(event);
+        reserve(event);
       });
 
     },
@@ -70,16 +100,39 @@ function go(event, currentId) {
   });
 }
 
-function hire(event) {
+function reserve(event) {
   event.preventDefault();
   var headers = getHeaders();
+  var carId = replaceId(event, 'my_btn_id_', '');
+  debugger;
   $.ajax({
     type: "POST",
     url: "http://localhost:8888/car_hiring/car/reserve",
-    data: JSON.stringify({}),
+    data: JSON.stringify({carId: carId, pickupLocationId: this.currentLocationId}),
     headers: headers,
     success: function (data) {
-      console.warn(data);
+      debugger;
+      getCarList(null, data.currentLocationId);
+    },
+    error: function () {
+      debugger;
+    }
+  });
+}
+
+function giveBack(event) {
+  event.preventDefault();
+  return;
+  var headers = getHeaders();
+  var carId = replaceId(event, 'my_btn_id_', '');
+  $.ajax({
+    type: "POST",
+    url: "http://localhost:8888/car_hiring/car/giveBack",
+    data: JSON.stringify({carId: carId, returnLocationId: this.currentLocationId}),
+    headers: headers,
+    success: function (data) {
+      debugger;
+      getCarList(null, data.currentLocationId);
     },
     error: function () {
       debugger;
@@ -101,4 +154,10 @@ function getHeaders() {
   headers["cache-control"] = "no-cache";
   headers[tokenHeader] = token;
   return headers;
+}
+
+function replaceId(event, templateFrom, templateTo) {
+  // вырезаем из подстроки нр get_car_list_1 get_car_list_ и
+  // оставляем только номер
+  return event.currentTarget.id.replace(templateFrom, templateTo);
 }

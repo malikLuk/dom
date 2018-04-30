@@ -25,8 +25,8 @@ public class ReservationService extends CommonService<ReservationParams, Reserva
     return dao;
   }
 
-  public void reserve() {
-    dao.reserve();
+  public void reserve(ReservationParams params) {
+    dao.reserve(params);
   }
 
 }

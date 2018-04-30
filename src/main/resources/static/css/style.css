@@ -50,6 +50,12 @@ ul li {
   background-color: #f6f6f6;
 }
 
+.myButton:disabled {
+  background: none;
+  filter: none;
+  background-color: #dddddd !important;
+}
+
 .myButton:active {
   position: relative;
   top: 1px;

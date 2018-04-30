@@ -27,14 +27,14 @@ public class ReservationDao extends CommonHibernateDAO<ReservationParams, Reserv
     super.addRestrictions(criteria, params);
   }
 
-  @Transactional
   @Override
-  public void reserve() {
+  @Transactional
+  public void reserve(ReservationParams params) {
     Session session = this.getSessionFactory().getCurrentSession();
     ReservationEntity reservationDto = new ReservationEntity();
-    reservationDto.setCarId(new Long(8));
+    reservationDto.setCarId(params.getCarId());
     reservationDto.setPickupDate(new Date());
-    reservationDto.setPickupLocationId(new Long(3));
+    reservationDto.setPickupLocationId(params.getPickupLocationId());
     reservationDto.setUserId(Utilities.getUser().getId());
     session.save(reservationDto);
   }

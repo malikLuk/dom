@@ -25,7 +25,7 @@ public abstract class CommonHibernateDAO<P extends CommonParams, E extends Commo
     private SessionFactory sessionFactory;
 
     @Autowired
-    private ModelMapper modelMapper;
+    protected ModelMapper modelMapper;
     
     private Class<P> paramsClass;
 
@@ -79,7 +79,7 @@ public abstract class CommonHibernateDAO<P extends CommonParams, E extends Commo
     }
 
     @Transactional
-    public void reserve() {}
+    public void reserve(P params) {}
 
     protected void addRestrictions(Criteria criteria, P params) {
         try {
@@ -96,6 +96,10 @@ public abstract class CommonHibernateDAO<P extends CommonParams, E extends Commo
 
     public void create(P params) {
 
+    }
+
+    public D updateStatus(Long id) {
+        return null;
     }
 
 }

@@ -9,14 +9,14 @@ public class CarDto extends CommonDto {
 
     private CarHiringStatus status;
 
-    private Long currentLocationid;
+    private Long currentLocationId;
 
-    public Long getCurrentLocationid() {
-        return currentLocationid;
+    public Long getCurrentLocationId() {
+        return currentLocationId;
     }
 
-    public void setCurrentLocationid(Long currentLocationid) {
-        this.currentLocationid = currentLocationid;
+    public void setCurrentLocationId(Long currentLocationId) {
+        this.currentLocationId = currentLocationId;
     }
 
     public String getName() {
