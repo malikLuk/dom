@@ -16,8 +16,8 @@ function showMyCars(event) {
   var headers = getHeaders();
   $.ajax({
     type: "POST",
-    url: "http://localhost:8888/car_hiring/user_cars",
-    data: JSON.stringify({}),
+    url: "http://localhost:8888/car_hiring/car",
+    data: JSON.stringify({status: 'IS_NOT_AVAILABLE'}),
     headers: headers,
     success: function (data) {
       console.warn(data);
@@ -38,8 +38,7 @@ function showMyCars(event) {
         var carCaption = $('#car_caption_' + value.id);
         carCaption.append('<h3>' + value.name + '</h3>').append('<p>' + value.status + '</p>');
 
-        $('<button class="myButton" id="my_btn_id_' + value.id + '">hire car</button>').appendTo(carCaption);
-        $('#my_btn_id_' + value.id).prop('disabled', value.status != 'IS_AVAILABLE')
+        $('<button class="myButton" id="my_btn_id_' + value.id + '">give back</button>').appendTo(carCaption);
 
       });
 
@@ -107,11 +106,26 @@ function reserve(event) {
   debugger;
   $.ajax({
     type: "POST",
-    url: "http://localhost:8888/car_hiring/car/reserve",
+    url: "http://localhost:8888/car_hiring/reserve",
     data: JSON.stringify({carId: carId, pickupLocationId: this.currentLocationId}),
     headers: headers,
     success: function (data) {
+      updateStatus(data.carId);
+    },
+    error: function () {
       debugger;
+    }
+  });
+}
+
+function updateStatus(carId) {
+  var headers = getHeaders();
+  $.ajax({
+    type: "POST",
+    url: "http://localhost:8888/car_hiring/car/update_status",
+    data: JSON.stringify({id: carId}),
+    headers: headers,
+    success: function (data) {
       getCarList(null, data.currentLocationId);
     },
     error: function () {
@@ -122,6 +136,7 @@ function reserve(event) {
 
 function giveBack(event) {
   event.preventDefault();
+  debugger;
   return;
   var headers = getHeaders();
   var carId = replaceId(event, 'my_btn_id_', '');

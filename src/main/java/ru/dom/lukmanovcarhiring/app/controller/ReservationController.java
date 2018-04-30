@@ -16,29 +16,39 @@ import ru.dom.lukmanovcarhiring.app.service.ReservationService;
 import ru.dom.lukmanovcarhiring.common.controller.CommonController;
 import ru.dom.lukmanovcarhiring.common.service.CommonService;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/car_hiring/user_cars")
+@RequestMapping("/car_hiring")
 public class ReservationController extends CommonController<ReservationParams, ReservationEntity, ReservationDto> {
 
   @Autowired
-  private final ReservationService service;
+  private final ReservationService reservationService;
 
-  public ReservationController(ReservationService service) {
-    this.service = service;
+  public ReservationController(ReservationService reservationService) {
+    this.reservationService = reservationService;
   }
 
   @Override
   public CommonService<ReservationParams, ReservationEntity, ReservationDto> getService() {
-    return service;
+    return reservationService;
   }
 
   @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<List<ReservationDto>> getUserCars(Map<String, Object> model, @RequestBody ReservationParams params) {
     List<ReservationDto> list = this.filter(model, params);
     return new ResponseEntity<List<ReservationDto>>(list, HttpStatus.OK);
+  }
+
+  @RequestMapping(value = "/reserve", method = RequestMethod.POST,
+      produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<Map<String, Long>> reserve(Map<String, Object> model, @RequestBody ReservationParams params) {
+    reservationService.reserve(params);
+    HashMap<String, Long> map = new HashMap<>();
+    map.put("carId", params.getCarId());
+    return new ResponseEntity<Map<String, Long>>(map, HttpStatus.OK);
   }
 
 }

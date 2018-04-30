@@ -18,6 +18,9 @@ public class CarEntity extends CommonEntity {
     @Column(name = "I_CURRENT_LOCATION_ID")
     private Long currentLocationId;
 
+    @Column(name = "I_CURRENT_OWNER_ID")
+    private Long currentOwnerId;
+
     public String getName() {
         return name;
     }
@@ -40,5 +43,13 @@ public class CarEntity extends CommonEntity {
 
     public void setCurrentLocationId(Long currentLocationId) {
         this.currentLocationId = currentLocationId;
+    }
+
+    public Long getCurrentOwnerId() {
+        return currentOwnerId;
+    }
+
+    public void setCurrentOwnerId(Long currentOwnerId) {
+        this.currentOwnerId = currentOwnerId;
     }
 }

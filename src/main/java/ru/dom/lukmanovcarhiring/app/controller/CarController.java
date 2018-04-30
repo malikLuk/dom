@@ -4,13 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import ru.dom.lukmanovcarhiring.app.dao.entity.CarEntity;
+import ru.dom.lukmanovcarhiring.app.dao.entity.CarHiringStatus;
 import ru.dom.lukmanovcarhiring.app.dto.CarDto;
 import ru.dom.lukmanovcarhiring.app.params.CarParams;
 import ru.dom.lukmanovcarhiring.app.params.ReservationParams;
 import ru.dom.lukmanovcarhiring.app.service.CarService;
 import ru.dom.lukmanovcarhiring.app.service.ReservationService;
+import ru.dom.lukmanovcarhiring.app.utils.Utilities;
 import ru.dom.lukmanovcarhiring.common.controller.CommonController;
 import ru.dom.lukmanovcarhiring.common.service.CommonService;
 
@@ -40,15 +43,17 @@ public class CarController extends CommonController<CarParams, CarEntity, CarDto
 
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CarDto>> getCars(Map<String, Object> model, @RequestBody CarParams params) {
+        if (CarHiringStatus.IS_NOT_AVAILABLE == params.getStatus()) {
+            params.setCurrentOwnerId(Utilities.getUser().getId());
+        }
         List<CarDto> list =  this.filter(model, params);
         return new ResponseEntity<List<CarDto>>(list, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/reserve", method = RequestMethod.POST,
+    @RequestMapping(value = "/update_status", method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CarDto> reserve(Map<String, Object> model, @RequestBody ReservationParams params) {
-        reservationService.reserve(params);
-        return new ResponseEntity<CarDto>(this.updateStatus(params.getCarId()), HttpStatus.OK);
+    public ResponseEntity<CarDto> reserve(Map<String, Object> model, @RequestBody CarParams params) {
+        return new ResponseEntity<CarDto>(this.updateStatus(params.getId()), HttpStatus.OK);
     }
 
 }

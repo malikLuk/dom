@@ -8,6 +8,7 @@ import ru.dom.lukmanovcarhiring.app.dao.entity.CarEntity;
 import ru.dom.lukmanovcarhiring.app.dao.entity.CarHiringStatus;
 import ru.dom.lukmanovcarhiring.app.dto.CarDto;
 import ru.dom.lukmanovcarhiring.app.params.CarParams;
+import ru.dom.lukmanovcarhiring.app.utils.Utilities;
 import ru.dom.lukmanovcarhiring.common.dao.CommonHibernateDAO;
 
 @Repository(value = CarDao.DAO_NAME)
@@ -26,6 +27,7 @@ public class CarDao extends CommonHibernateDAO<CarParams, CarEntity, CarDto> {
         Session session = this.getSessionFactory().getCurrentSession();
         CarEntity carEntity = (CarEntity) session.get(CarEntity.class, id);
         carEntity.setStatus(CarHiringStatus.IS_NOT_AVAILABLE);
+        carEntity.setCurrentOwnerId(Utilities.getUser().getId());
         return this.modelMapper.map(carEntity, CarDto.class);
     }
 }

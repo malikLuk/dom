@@ -14,8 +14,10 @@ create table car(i_id int not null auto_increment,
                  i_current_location_id int not null,
                  s_name varchar(255),
                  i_status int default 0,
+                 i_current_owner_id int default null,
                  primary key(i_id),
-                 foreign key (i_current_location_id) references location(i_id));
+                 foreign key (i_current_location_id) references location(i_id),
+                 foreign key (i_current_owner_id) references user(i_id));
 
 create table reservation(i_id int not null auto_increment,
                          d_pickup_date date,

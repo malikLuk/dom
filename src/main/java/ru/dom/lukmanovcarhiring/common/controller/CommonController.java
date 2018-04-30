@@ -31,7 +31,6 @@ public abstract class CommonController<P extends CommonParams, E extends CommonE
 
     }
 
-//    @RequestMapping(value = "/filter", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<D> filter(Map<String, Object> model, P params) {
         return this.getService().filter(params);
     }

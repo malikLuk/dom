@@ -11,6 +11,8 @@ public class CarDto extends CommonDto {
 
     private Long currentLocationId;
 
+    private Long currentOwnerId;
+
     public Long getCurrentLocationId() {
         return currentLocationId;
     }
@@ -33,5 +35,13 @@ public class CarDto extends CommonDto {
 
     public void setStatus(CarHiringStatus status) {
         this.status = status;
+    }
+
+    public Long getCurrentOwnerId() {
+        return currentOwnerId;
+    }
+
+    public void setCurrentOwnerId(Long currentOwnerId) {
+        this.currentOwnerId = currentOwnerId;
     }
 }
