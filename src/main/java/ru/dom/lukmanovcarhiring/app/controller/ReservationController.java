@@ -44,11 +44,16 @@ public class ReservationController extends CommonController<ReservationParams, R
 
   @RequestMapping(value = "/reserve", method = RequestMethod.POST,
       produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Map<String, Long>> reserve(Map<String, Object> model, @RequestBody ReservationParams params) {
-    reservationService.reserve(params);
-    HashMap<String, Long> map = new HashMap<>();
-    map.put("carId", params.getCarId());
-    return new ResponseEntity<Map<String, Long>>(map, HttpStatus.OK);
+  public ResponseEntity<ReservationDto> reserve(Map<String, Object> model, @RequestBody ReservationParams params) {
+    ReservationDto reservationDto = reservationService.reserve(params);
+    return new ResponseEntity<ReservationDto>(reservationDto, HttpStatus.OK);
+  }
+
+  @RequestMapping(value = "/give_back", method = RequestMethod.POST,
+      produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<ReservationDto> giveBack(Map<String, Object> model, @RequestBody ReservationParams params) {
+    ReservationDto reservationDto = reservationService.giveBack(params);
+    return new ResponseEntity<ReservationDto>(reservationDto, HttpStatus.OK);
   }
 
 }

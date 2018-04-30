@@ -18,8 +18,8 @@ public abstract class CommonService<P extends CommonParams, E extends CommonEnti
         return this.getDao().filter(params);
     }
 
-    public D updateStatus(Long id) {
-        return this.getDao().updateStatus(id);
+    public D updateStatus(P params) {
+        return this.getDao().updateStatus(params);
     }
 
 }

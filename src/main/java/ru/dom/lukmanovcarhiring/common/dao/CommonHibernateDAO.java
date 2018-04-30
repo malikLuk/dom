@@ -79,12 +79,18 @@ public abstract class CommonHibernateDAO<P extends CommonParams, E extends Commo
     }
 
     @Transactional
-    public void reserve(P params) {}
+    public D reserve(P params) {
+        return null;
+    }
+
+    @Transactional
+    public D giveBack(P params) {
+        return null;
+    }
 
     protected void addRestrictions(Criteria criteria, P params) {
         try {
             for (PropertyDescriptor descriptor : Introspector.getBeanInfo(params.getClass()).getPropertyDescriptors()) {
-                System.out.println(descriptor.getReadMethod());
                 if (descriptor.getReadMethod().invoke(params) != null && !"class".equals(descriptor.getName())) {
                     criteria.add(Restrictions.eq(descriptor.getName(), descriptor.getReadMethod().invoke(params)));
                 }
@@ -98,7 +104,7 @@ public abstract class CommonHibernateDAO<P extends CommonParams, E extends Commo
 
     }
 
-    public D updateStatus(Long id) {
+    public D updateStatus(P params) {
         return null;
     }
 

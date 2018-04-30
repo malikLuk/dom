@@ -53,7 +53,7 @@ public class CarController extends CommonController<CarParams, CarEntity, CarDto
     @RequestMapping(value = "/update_status", method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CarDto> reserve(Map<String, Object> model, @RequestBody CarParams params) {
-        return new ResponseEntity<CarDto>(this.updateStatus(params.getId()), HttpStatus.OK);
+        return new ResponseEntity<CarDto>(this.updateStatus(params), HttpStatus.OK);
     }
 
 }

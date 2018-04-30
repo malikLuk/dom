@@ -35,8 +35,8 @@ public abstract class CommonController<P extends CommonParams, E extends CommonE
         return this.getService().filter(params);
     }
 
-    public D updateStatus(Long id) {
-        return this.getService().updateStatus(id);
+    public D updateStatus(P params) {
+        return this.getService().updateStatus(params);
     }
 
 }

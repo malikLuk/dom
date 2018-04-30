@@ -29,14 +29,27 @@ public class ReservationDao extends CommonHibernateDAO<ReservationParams, Reserv
 
   @Override
   @Transactional
-  public void reserve(ReservationParams params) {
+  public ReservationDto reserve(ReservationParams params) {
     Session session = this.getSessionFactory().getCurrentSession();
-    ReservationEntity reservationDto = new ReservationEntity();
-    reservationDto.setCarId(params.getCarId());
-    reservationDto.setPickupDate(new Date());
-    reservationDto.setPickupLocationId(params.getPickupLocationId());
-    reservationDto.setUserId(Utilities.getUser().getId());
-    session.save(reservationDto);
+    ReservationEntity reservationEntity = new ReservationEntity();
+    reservationEntity.setCarId(params.getCarId());
+    reservationEntity.setPickupDate(new Date());
+    reservationEntity.setPickupLocationId(params.getPickupLocationId());
+    reservationEntity.setUserId(Utilities.getUser().getId());
+    session.save(reservationEntity);
+    return this.modelMapper.map(reservationEntity, ReservationDto.class);
   }
 
+  @Override
+  @Transactional
+  public ReservationDto giveBack(ReservationParams params) {
+    Session session = this.getSessionFactory().getCurrentSession();
+    ReservationEntity reservationEntity = new ReservationEntity();
+    reservationEntity.setCarId(params.getCarId());
+    reservationEntity.setReturnDate(new Date());
+    reservationEntity.setReturnLocationId(params.getReturnLocationId());
+    reservationEntity.setUserId(null);
+    session.save(reservationEntity);
+    return this.modelMapper.map(reservationEntity, ReservationDto.class);
+  }
 }

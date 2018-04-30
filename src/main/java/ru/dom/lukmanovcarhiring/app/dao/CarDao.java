@@ -23,11 +23,18 @@ public class CarDao extends CommonHibernateDAO<CarParams, CarEntity, CarDto> {
 
     @Override
     @Transactional
-    public CarDto updateStatus(Long id) {
+    public CarDto updateStatus(CarParams params) {
         Session session = this.getSessionFactory().getCurrentSession();
-        CarEntity carEntity = (CarEntity) session.get(CarEntity.class, id);
-        carEntity.setStatus(CarHiringStatus.IS_NOT_AVAILABLE);
-        carEntity.setCurrentOwnerId(Utilities.getUser().getId());
-        return this.modelMapper.map(carEntity, CarDto.class);
+        CarEntity carEntity = (CarEntity) session.get(CarEntity.class, params.getId());
+        if (params.getStatus() == CarHiringStatus.IS_NOT_AVAILABLE) {
+            carEntity.setStatus(CarHiringStatus.IS_NOT_AVAILABLE);
+            carEntity.setCurrentOwnerId(Utilities.getUser().getId());
+            return this.modelMapper.map(carEntity, CarDto.class);
+        } else {
+            carEntity.setStatus(CarHiringStatus.IS_AVAILABLE);
+            carEntity.setCurrentOwnerId(null);
+            carEntity.setCurrentLocationId(params.getCurrentLocationId());
+            return this.modelMapper.map(carEntity, CarDto.class);
+        }
     }
 }

@@ -1,4 +1,14 @@
+var _this = this;
+
 $(document).ready(function () {
+  var me = this;
+
+  $("[id^=choose_location_]").on('click', function (event) {
+    event.preventDefault();
+    var currentLocationId = replaceId(event, 'choose_location_', '');
+    $('#current_location').text($('#get_car_list_'+ currentLocationId).parent().find('h3').text());
+    _this.currentLocationId = currentLocationId;
+  });
 
   $("[id^=get_car_list_]").on('click', function (event) {
     var currentId = replaceId(event, 'get_car_list_', '');
@@ -12,7 +22,7 @@ $(document).ready(function () {
 });
 
 function showMyCars(event) {
-  event.preventDefault();
+  event ? event.preventDefault() : null;
   var headers = getHeaders();
   $.ajax({
     type: "POST",
@@ -53,9 +63,8 @@ function showMyCars(event) {
 }
 
 function getCarList(event, currentId) {
-  var me = this;
-  me.currentLocationId = currentId;
-  // ищем имя текущего адреса по странице, чтобы не лезть в базу
+  this.currentLocationId = currentId;
+  // ищем имя текущего адреса по странице, чтобы не лезть в базу и показываем где-то наверху в h1
   $('#current_location').text($('#get_car_list_'+currentId).parent().find('h3').text());
   event ? event.preventDefault() : null;
   var headers = getHeaders();
@@ -109,24 +118,8 @@ function reserve(event) {
     url: "http://localhost:8888/car_hiring/reserve",
     data: JSON.stringify({carId: carId, pickupLocationId: this.currentLocationId}),
     headers: headers,
-    success: function (data) {
-      updateStatus(data.carId);
-    },
-    error: function () {
-      debugger;
-    }
-  });
-}
-
-function updateStatus(carId) {
-  var headers = getHeaders();
-  $.ajax({
-    type: "POST",
-    url: "http://localhost:8888/car_hiring/car/update_status",
-    data: JSON.stringify({id: carId}),
-    headers: headers,
-    success: function (data) {
-      getCarList(null, data.currentLocationId);
+    success: function (response) {
+      updateStatus({id: response.carId, status: "IS_NOT_AVAILABLE"}, "reserve");
     },
     error: function () {
       debugger;
@@ -137,17 +130,16 @@ function updateStatus(carId) {
 function giveBack(event) {
   event.preventDefault();
   debugger;
-  return;
+  var me = this;
   var headers = getHeaders();
   var carId = replaceId(event, 'my_btn_id_', '');
   $.ajax({
     type: "POST",
-    url: "http://localhost:8888/car_hiring/car/giveBack",
-    data: JSON.stringify({carId: carId, returnLocationId: this.currentLocationId}),
+    url: "http://localhost:8888/car_hiring/give_back",
+    data: JSON.stringify({carId: carId, returnLocationId: _this.currentLocationId}),
     headers: headers,
-    success: function (data) {
-      debugger;
-      getCarList(null, data.currentLocationId);
+    success: function (response) {
+      updateStatus({id: response.carId, status: "IS_AVAILABLE", currentLocationId: response.returnLocationId}, "giveBack");
     },
     error: function () {
       debugger;
@@ -155,9 +147,26 @@ function giveBack(event) {
   });
 }
 
-function wildcardEvent(idTemplate, eventType, func) {
-  $("[id^=" + idTemplate + "]").on(eventType, function (event) {
-    func(event);
+function updateStatus(data, action) {
+  var headers = getHeaders();
+  debugger;
+  $.ajax({
+    type: "POST",
+    url: "http://localhost:8888/car_hiring/car/update_status",
+    data: JSON.stringify(data),
+    headers: headers,
+    success: function (response) {
+      if (action == "giveBack") {
+        showMyCars(null);
+      }
+      if (action == "reserve") {
+        debugger;
+        getCarList(null, response.currentLocationId);
+      }
+    },
+    error: function () {
+      debugger;
+    }
   });
 }
 
