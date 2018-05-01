@@ -9,6 +9,11 @@ import ru.dom.lukmanovcarhiring.common.service.CommonService;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Базовый контроллер. Расчитываем на то, что запросы будут типовыми и для каждой бизнес-сущности
+ * создаем классы параметров, энтити и дто(хотя, в нем нет особой надобности, добавил просто потому,
+ * что подход с трансефер-объектами устоявшийся)
+ * */
 public abstract class CommonController<P extends CommonParams, E extends CommonEntity, D extends CommonDto> {
 
     public abstract CommonService<P, E, D> getService();

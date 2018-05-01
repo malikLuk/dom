@@ -1,7 +1,6 @@
 package ru.dom.lukmanovcarhiring.configuration.security;
 
 import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ public class UserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    // в качестве логина используем поле s_first_name таблицы user
     public UserEntity findByFirstName(String firstName) {
         Criteria crit = getCriteria();
         crit.add(Restrictions.eq("firstName", firstName));
@@ -33,7 +33,6 @@ public class UserDao {
 
     public void saveUser(UserDto user) {
         UserEntity userEntity = new UserEntity();
-//        userEntity.setId(new Long(2));
         userEntity.setFirstName(user.getFirstName());
         userEntity.setLastName(user.getLastName());
         userEntity.setPassword(user.getPassword());

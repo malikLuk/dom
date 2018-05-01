@@ -6,6 +6,12 @@ import org.springframework.security.core.userdetails.User;
 import java.io.Serializable;
 import java.util.Collection;
 
+/**
+ * Собственный юзер нужен для того, чтобы дергать ид текущего
+ * пользователя из принципала контекста безопасности, а не
+ * отправлять его в запросе или определять его каким-то
+ * другим способом
+ * */
 public class CustomUser extends User implements Serializable{
 
   private static final long serialVersionUID = 5472777629671779288L;

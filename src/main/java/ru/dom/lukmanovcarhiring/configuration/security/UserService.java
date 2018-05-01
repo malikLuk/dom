@@ -17,11 +17,13 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    // логин
     public UserEntity findByFirstName(String firstName) {
         UserEntity user = dao.findByFirstName(firstName);
         return user;
     }
 
+    // регистрация
     public void saveUser(UserDto user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         dao.saveUser(user);

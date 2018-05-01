@@ -43,6 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+        // Spring Security без аутентификации не даст доступа даже к статическим ресурсам
+        // с ролями и правами заморачиваться не стал
         http.authorizeRequests().antMatchers(
             "/registration",
             "/js/**",
@@ -63,8 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/index", "/hire", "/car_hiring/**")
                 .hasAuthority("USER")
             .anyRequest().authenticated()
-                .and()
-            /*.csrf().disable()*/;
+                .and();
 
     }
 

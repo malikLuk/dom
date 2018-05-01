@@ -6,12 +6,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.dom.lukmanovcarhiring.app.dao.entity.CarEntity;
-import ru.dom.lukmanovcarhiring.app.dao.entity.CarHiringStatus;
 import ru.dom.lukmanovcarhiring.app.dto.CarDto;
 import ru.dom.lukmanovcarhiring.app.params.CarParams;
 import ru.dom.lukmanovcarhiring.app.service.CarService;
 import ru.dom.lukmanovcarhiring.app.service.ReservationService;
-import ru.dom.lukmanovcarhiring.app.utils.Utilities;
 import ru.dom.lukmanovcarhiring.common.controller.CommonController;
 import ru.dom.lukmanovcarhiring.common.service.CommonService;
 

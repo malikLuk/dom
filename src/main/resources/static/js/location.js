@@ -41,6 +41,7 @@ function showMyCars(event) {
    * описано выше
    * */
   event ? event.preventDefault() : null;
+  // заголовки предполагаются стандартные для реста
   var headers = getHeaders();
   $.ajax({
     type: "POST",
@@ -123,9 +124,6 @@ function getCarList(event, locationId) {
         })
 
       });
-      /*$("[id^=my_btn_id_]").on('click', function (event) {
-        reserve(event);
-      });*/
     },
     error: function () {
     }
@@ -145,10 +143,8 @@ function showHistory(event, carId) {
       if (response.length !== 0) {
         response.forEach(function (value, index) {
           if ((index & 1) == 0) { //битовое И быстрее работает
-            debugger;
             message += "Hired: " + value.pickupDate + ", in " + value.locationAddress;
           } else {
-            debugger;
             message += "Returned: " + value.returnDate + ", in " + value.locationAddress;
           }
           message += "\n";
@@ -167,7 +163,6 @@ function reserve(event) {
   event.preventDefault();
   var headers = getHeaders();
   var carId = replaceId(event, 'my_btn_id_', '');
-  debugger;
   $.ajax({
     type: "POST",
     url: "http://localhost:8888/car_hiring/reserve",

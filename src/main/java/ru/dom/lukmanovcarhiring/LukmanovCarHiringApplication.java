@@ -8,6 +8,9 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * exclude нужны, так как автоконфиги перетирают мои собственные (Разобратья)
+ * */
 @SpringBootApplication(scanBasePackages = {"ru"} , exclude = {JpaRepositoriesAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @EnableTransactionManagement
 public class LukmanovCarHiringApplication extends SpringBootServletInitializer {
