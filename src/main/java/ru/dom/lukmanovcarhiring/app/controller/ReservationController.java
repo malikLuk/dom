@@ -36,8 +36,9 @@ public class ReservationController extends CommonController<ReservationParams, R
     return reservationService;
   }
 
-  @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<List<ReservationDto>> getUserCars(Map<String, Object> model, @RequestBody ReservationParams params) {
+  @RequestMapping(value = "filter", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
+      consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<List<ReservationDto>> getFilter(Map<String, Object> model, @RequestBody ReservationParams params) {
     List<ReservationDto> list = this.filter(model, params);
     return new ResponseEntity<List<ReservationDto>>(list, HttpStatus.OK);
   }
@@ -53,7 +54,11 @@ public class ReservationController extends CommonController<ReservationParams, R
       produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<ReservationDto> giveBack(Map<String, Object> model, @RequestBody ReservationParams params) {
     ReservationDto reservationDto = reservationService.giveBack(params);
-    return new ResponseEntity<ReservationDto>(reservationDto, HttpStatus.OK);
+    if (reservationDto != null) {
+      return new ResponseEntity<ReservationDto>(reservationDto, HttpStatus.OK);
+    } else {
+      return new ResponseEntity<ReservationDto>(reservationDto, HttpStatus.FORBIDDEN);
+    }
   }
 
 }

@@ -18,6 +18,9 @@ public class CarDao extends CommonHibernateDAO<CarParams, CarEntity, CarDto> {
 
     @Override
     protected void addRestrictions(Criteria criteria, CarParams params) {
+        if (CarHiringStatus.IS_NOT_AVAILABLE == params.getStatus()) {
+            params.setCurrentOwnerId(Utilities.getUser().getId());
+        }
         super.addRestrictions(criteria, params);
     }
 

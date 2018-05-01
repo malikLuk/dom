@@ -1,3 +1,4 @@
+/*
 package ru.dom.lukmanovcarhiring.app.dao;
 
 import ru.dom.lukmanovcarhiring.app.dao.entity.CarEntity;
@@ -9,3 +10,4 @@ public interface IBaseDao {
     public List<CarEntity> getAllCars();
 
 }
+*/

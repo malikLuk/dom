@@ -21,7 +21,6 @@ public class UserDto extends CommonDto {
   @NotEmpty
   private String confirmPassword;
 
-//  @NotEmpty
   private String role;
 
   public String getFirstName() {

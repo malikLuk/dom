@@ -29,6 +29,9 @@ public class ReservationEntity extends CommonEntity {
     @Column(name = "I_CAR_ID")
     private Long carId;
 
+    @Column(name = "S_LOCATION_ADDRESS")
+    private String locationAddress;
+
     public Date getPickupDate() {
         return pickupDate;
     }
@@ -76,14 +79,12 @@ public class ReservationEntity extends CommonEntity {
     public void setCarId(Long carId) {
         this.carId = carId;
     }
+
+    public String getLocationAddress() {
+        return locationAddress;
+    }
+
+    public void setLocationAddress(String locationAddress) {
+        this.locationAddress = locationAddress;
+    }
 }
-
-/*
-
-i_id int not null auto_increment,
-    d_pickup_date date,
-    d_return_date date,
-    i_pickup_location_id int default null,
-    i_return_location_id int default null,
-    i_user_id int default null,
-    i_car_id int default null,*/

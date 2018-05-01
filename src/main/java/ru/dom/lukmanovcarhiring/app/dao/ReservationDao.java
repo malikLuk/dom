@@ -21,9 +21,6 @@ public class ReservationDao extends CommonHibernateDAO<ReservationParams, Reserv
 
   @Override
   protected void addRestrictions(Criteria criteria, ReservationParams params) {
-    CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    Long userId = user.getId();
-    params.setUserId(userId);
     super.addRestrictions(criteria, params);
   }
 
@@ -35,6 +32,7 @@ public class ReservationDao extends CommonHibernateDAO<ReservationParams, Reserv
     reservationEntity.setCarId(params.getCarId());
     reservationEntity.setPickupDate(new Date());
     reservationEntity.setPickupLocationId(params.getPickupLocationId());
+    reservationEntity.setLocationAddress(params.getLocationAddress());
     reservationEntity.setUserId(Utilities.getUser().getId());
     session.save(reservationEntity);
     return this.modelMapper.map(reservationEntity, ReservationDto.class);
@@ -43,13 +41,18 @@ public class ReservationDao extends CommonHibernateDAO<ReservationParams, Reserv
   @Override
   @Transactional
   public ReservationDto giveBack(ReservationParams params) {
-    Session session = this.getSessionFactory().getCurrentSession();
-    ReservationEntity reservationEntity = new ReservationEntity();
-    reservationEntity.setCarId(params.getCarId());
-    reservationEntity.setReturnDate(new Date());
-    reservationEntity.setReturnLocationId(params.getReturnLocationId());
-    reservationEntity.setUserId(null);
-    session.save(reservationEntity);
-    return this.modelMapper.map(reservationEntity, ReservationDto.class);
+    if (params.getReturnLocationId() != null) {
+      Session session = this.getSessionFactory().getCurrentSession();
+      ReservationEntity reservationEntity = new ReservationEntity();
+      reservationEntity.setCarId(params.getCarId());
+      reservationEntity.setReturnDate(new Date());
+      reservationEntity.setReturnLocationId(params.getReturnLocationId());
+      reservationEntity.setLocationAddress(params.getLocationAddress());
+      reservationEntity.setUserId(null);
+      session.save(reservationEntity);
+      return this.modelMapper.map(reservationEntity, ReservationDto.class);
+    } else {
+      return null;
+    }
   }
 }

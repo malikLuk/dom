@@ -1,12 +1,6 @@
 package ru.dom.lukmanovcarhiring.common.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.GenericTypeResolver;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import ru.dom.lukmanovcarhiring.common.dao.entity.CommonEntity;
 import ru.dom.lukmanovcarhiring.common.params.CommonParams;
 import ru.dom.lukmanovcarhiring.common.dto.CommonDto;

@@ -18,6 +18,8 @@ public class ReservationParams extends CommonParams {
 
   private Long carId;
 
+  private String locationAddress;
+
   public Date getPickupDate() {
     return pickupDate;
   }
@@ -64,5 +66,13 @@ public class ReservationParams extends CommonParams {
 
   public void setCarId(Long carId) {
     this.carId = carId;
+  }
+
+  public String getLocationAddress() {
+    return locationAddress;
+  }
+
+  public void setLocationAddress(String locationAddress) {
+    this.locationAddress = locationAddress;
   }
 }

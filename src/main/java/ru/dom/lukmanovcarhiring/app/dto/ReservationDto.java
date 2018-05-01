@@ -18,6 +18,8 @@ public class ReservationDto extends CommonDto {
 
     private Long carId;
 
+    private String locationAddress;
+
     public Date getPickupDate() {
         return pickupDate;
     }
@@ -66,4 +68,11 @@ public class ReservationDto extends CommonDto {
         this.carId = carId;
     }
 
+    public String getLocationAddress() {
+        return locationAddress;
+    }
+
+    public void setLocationAddress(String locationAddress) {
+        this.locationAddress = locationAddress;
+    }
 }

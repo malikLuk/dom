@@ -1,3 +1,4 @@
+/*
 package ru.dom.lukmanovcarhiring.app.dao;
 
 import org.hibernate.SessionFactory;
@@ -14,10 +15,13 @@ public class BaseDao extends CommonHibernateDAO<CommonParams, CarEntity, CarDto>
     @Autowired
     private SessionFactory sessionFactory;
 
-    /*public List<CarEntity> getAllCars() {
+    */
+/*public List<CarEntity> getAllCars() {
         Session session = sessionFactory.getCurrentSession();
         List<CarEntity> cars = session.createQuery("from CarEntity").list();
         return cars;
-    }*/
+    }*//*
+
 
 }
+*/
