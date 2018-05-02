@@ -54,11 +54,8 @@ public class ReservationController extends CommonController<ReservationParams, R
       produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<ReservationDto> giveBack(Map<String, Object> model, @RequestBody ReservationParams params) {
     ReservationDto reservationDto = reservationService.giveBack(params);
-    if (reservationDto != null) {
-      return new ResponseEntity<ReservationDto>(reservationDto, HttpStatus.OK);
-    } else {
-      return new ResponseEntity<ReservationDto>(reservationDto, HttpStatus.FORBIDDEN);
-    }
+    HttpStatus status = reservationDto != null ? HttpStatus.OK : HttpStatus.FORBIDDEN;
+    return new ResponseEntity<ReservationDto>(reservationDto, status);
   }
 
 }

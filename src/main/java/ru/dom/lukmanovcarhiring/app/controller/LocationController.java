@@ -1,6 +1,8 @@
 package ru.dom.lukmanovcarhiring.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,7 +32,7 @@ public class LocationController extends CommonController<LocationParams, Locatio
         return service;
     }
 
-    @RequestMapping
+    @PostMapping
     public ModelAndView hire(Map<String, Object> model, LocationParams params) {
         List<LocationDto> list =  this.filter(model, params);
         ModelAndView modelAndView = new ModelAndView();

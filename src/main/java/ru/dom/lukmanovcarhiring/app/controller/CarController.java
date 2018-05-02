@@ -37,7 +37,7 @@ public class CarController extends CommonController<CarParams, CarEntity, CarDto
         return carService;
     }
 
-    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CarDto>> getCars(Map<String, Object> model, @RequestBody CarParams params) {
         List<CarDto> list =  this.filter(model, params);
         return new ResponseEntity<List<CarDto>>(list, HttpStatus.OK);
