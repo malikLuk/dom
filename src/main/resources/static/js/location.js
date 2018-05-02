@@ -64,7 +64,7 @@ function showMyCars(event) {
         carThumbnail.append('<div class="caption" id="car_caption_' + value.id + '">');
 
         var carCaption = $('#car_caption_' + value.id);
-        carCaption.append('<h3>' + value.name + '</h3>').append('<p>' + value.status + '</p>');
+        // carCaption.append('<h3>' + value.name + '</h3>').append('<p>' + value.status + '</p>');
 
         $('<button class="myButton" id="my_btn_id_' + value.id + '">give back</button>').appendTo(carCaption);
 

@@ -21,7 +21,6 @@
     <div class="thumbnail">
       <div class="caption">
         <h3 th:text="${location.address}"></h3>
-        <h4 th:text="${location.id}"></h4>
         <form th:id="'choose_location_' + ${location.id}">
           <button class="myButton">Choose location for giving back</button>
         </form>

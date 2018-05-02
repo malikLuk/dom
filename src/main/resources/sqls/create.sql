@@ -1,4 +1,3 @@
--------------------------------------------- creates --------------------------------------------
 create table user(i_id int not null auto_increment,
                   s_first_name varchar(255) unique,
                   s_last_name varchar(255),
@@ -33,8 +32,6 @@ create table reservation(i_id int not null auto_increment,
                          foreign key(i_pickup_location_id) references location(i_id),
                          foreign key(i_return_location_id) references location(i_id));
 
--------------------------------------------- inserts --------------------------------------------
-
 insert into location(s_address) values
                        ('balatovo'),
                        ('kompross'),
@@ -48,15 +45,3 @@ insert into car(i_current_location_id, s_name, i_status) values
                 (1, 'onefour', 0),
                 (2, 'tank', 0),
                 (3, 'tsoi', 0);
-
-/*
-create table role(i_id int not null auto_increment,
-                  s_role_name varchar(255),
-                  primary key(i_id));
-
-create table user_role(i_user_id int not null,
-                       i_role_id int not null);
-
-insert into role(name) values ("USER"), ("ADMIN");
-
-insert into */
